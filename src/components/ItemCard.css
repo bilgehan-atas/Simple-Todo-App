@@ -1,0 +1,255 @@
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.ItemCard_container {
+  background-color: var(--background);
+  width: 75ch;
+  margin: auto;
+}
+
+.ItemCard_item {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(auto, 65ch) minmax(0, auto);
+  gap: 1rem;
+}
+
+.ItemCard_completion_icon {
+  position: relative;
+  grid-column: 1;
+  padding-top: 1.1rem;
+}
+
+.ItemCard_completion_icon input {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: solid 2px var(--accent);
+  cursor: pointer;
+}
+
+.ItemCard_completion_icon input:hover{
+  background-color: var(--accent);
+  box-shadow: inset 0 0 0 0.1rem var(--background);
+}
+
+.ItemCard_completion_icon input:checked {
+  background-color: var(--accent);
+}
+
+.ItemCard_completion_icon input:checked:hover {
+  background-color: var(--background);
+  box-shadow: inset 0 0 0 0.1rem var(--accent);
+}
+
+.ItemCard_completion_icon#reloading input {
+  background-color: var(--background);
+  border: 2px dashed var(--accent);
+  border-radius: 50%;
+  animation: spin-1 10s linear infinite;
+}
+
+.ItemCard_completion_icon input:disabled {
+  background: none;
+  cursor: default;
+}
+
+.ItemCard_completion_icon input:disabled:hover{
+  box-shadow: none;
+}
+
+.ItemCard_description {
+  grid-column: 2;
+  font-size: var(--fs-base);
+  white-space: pre-wrap;
+}
+
+.ItemCard_description_nl {
+  grid-column: 2;
+  font-size: var(--fs-base);
+  white-space: pre-wrap;
+}
+
+.ItemCard_description_nl::first-line {
+  font-weight: var(--fw-bold);
+}
+
+.ItemCard_edit_icon {
+  grid-column: 3;
+  border-radius: 5px;
+  align-self: end;
+}
+
+.ItemCard_edit_icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ItemCard_edit_icon button {
+  color: var(--main-icons);
+  border-radius: 5px;
+}
+
+#edit_button:hover {
+  background-color: var(--background-main-hover);
+}
+
+#delete_button:hover {
+  background-color: var(--background-main-hover-accent);
+}
+
+.ItemCard_item::after {
+  grid-column: 1 / -1;
+  content: "";
+  display: block;
+  margin-top: 1rem;
+  border-bottom: 1px solid var(--background-main-hover);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: calc(100%-2rem);
+}
+
+.ItemCard_edit_container {
+  grid-column: 1 / -1;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--background-main-hover);
+  border-radius: 10px;
+  background-color: var(--background);
+}
+
+.ItemCard_edit_textarea_container {
+  margin: 1rem;
+}
+
+.ItemCard_edit_textarea_container textarea {
+  width: 100%;
+  background-color: var(--background);
+  caret-color: var(--caret-main);
+  font-family: var(--ff-primary);
+  font-size: var(--fs-base);
+}
+
+.ItemCard_edit_textarea_container textarea::first-line {
+  font-weight: var(--fw-bold);
+}
+
+.ItemCard_edit_info {
+  height: 1.5rem;
+}
+
+.ItemCard_edit_info p {
+  padding-left: 1rem;
+  font-size: var(--fs-sm);
+  color: var(--accent);
+}
+
+.ItemCard_edit_buttons {
+  display: flex;
+  align-self: flex-end;
+  padding: 1rem;
+}
+
+.ItemCard_edit_buttons button {
+  min-width: 12ch;
+  margin: 0.1rem;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  position: relative;
+}
+
+#button_cancel {
+  background-color: gray;
+}
+
+#button_accept {
+  background-color: var(--accent);
+}
+
+#button_accept svg {
+  height: var(--fs-sm);
+  vertical-align: middle;
+  animation: spin-1 1.2s linear infinite;
+}
+
+.ItemCard_confirmation {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--background-main-hover);
+  border-radius: 10px;
+  padding: 0.5rem;
+  background-color: var(--background);
+}
+
+.ItemCard_confirmation button {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: white;
+  position: relative;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  min-width: 4.5rem;
+}
+
+.Pages_container {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-sm);
+}
+
+.Pages_desc {
+  flex-shrink: 0;
+}
+
+.Pages_pagination {
+  display: flex; 
+}
+
+.Pages_pagination li span {
+  display: inline-block;
+  color: var(--text-secondary);
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  margin: 0.2rem;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle ;
+}
+
+.Pages_pagination li span:hover {
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.Pages_pagination li.active span,
+.Pages_pagination li.active span.Pages_page_link {
+  background: var(--background-main-hover);
+}
+
+.Pages_pagination li.active span:hover {
+  color: var(--text-secondary);
+  cursor: default;
+}
+
+.disabled span {
+  color: var(--text-secondary) !important;
+  cursor: default !important;
+}
+
+@keyframes spin-1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

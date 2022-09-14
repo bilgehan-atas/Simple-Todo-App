@@ -1,0 +1,52 @@
+.App {
+  min-height: 100vh;
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+.user_name_input_container {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  border: 1px solid var(--background-main-hover);
+  border-radius: 10px;
+  width: max-content;
+}
+
+.user_name_input {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_name_input p {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+}
+
+.user_name_input input {
+  width: 30ch;
+  border: 1px solid var(--background-main-hover);
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+}
+
+.user_name_input button {
+  width: 30ch;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: white;
+  background-color: var(--accent);
+  border-radius: 10px;
+}
+
+.user_name_input button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}

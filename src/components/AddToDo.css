@@ -1,0 +1,76 @@
+.AddToDo_container {
+  position: fixed;
+  max-width: 90%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--background-main-hover);
+  border-radius: 10px;
+  background-color: var(--background);
+}
+
+.AddToDo_sub_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.AddToDo_text {
+  padding: 3px;
+  width: 100%;
+}
+
+.AddToDo_text textarea {
+  padding: 1rem;
+  width: 65ch;
+  min-height: 5rem;
+  border-radius: 5px;
+  background-color: var(--background);
+  caret-color: var(--caret-main);
+  font-family: var(--ff-primary);
+  font-size: var(--fs-base);
+}
+
+.AddToDo_text textarea::first-line {
+  font-weight: var(--fw-bold);
+}
+
+.AddToDo_bottom_container {
+  display: flex;
+  align-self: flex-end;
+  padding: 1rem;
+}
+
+.AddToDo_bottom_container button {
+  min-width: 12ch;
+  margin: 0.1rem;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+#button_cancel {
+  background-color: gray;
+}
+
+#button_accept {
+  background-color: var(--accent);
+}
+
+.AddToDo_bottom_container button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.status {
+  height: 0.3rem;
+  transition:all 0.5s ease;
+  padding-left: 1rem;
+  font-size: var(--fs-sm);
+  color: var(--accent);
+}
+
+.status.ok {
+  background-color: green;
+}
