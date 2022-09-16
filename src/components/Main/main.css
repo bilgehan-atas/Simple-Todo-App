@@ -31,19 +31,19 @@ p {
   font-weight: var(--fw-semi-bold);
 }
 
-.main_show_button{
+.main_comleted_handler{
   text-align: end;
   text-transform: uppercase;
 }
 
-.main_show_button span{
+.main_comleted_handler span{
   font-size: var(--fs-sm);
   font-weight: var(--fw-semi-bold);
   color: var(--text-secondary);
   cursor: pointer;
 }
 
-.main_show_button span:hover{
+.main_comleted_handler span:hover{
   color: var(--accent);
 }
 

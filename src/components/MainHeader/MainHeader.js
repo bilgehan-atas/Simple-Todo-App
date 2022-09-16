@@ -1,9 +1,9 @@
-import "./MainHeader.css";
-import { ReactComponent as MenuSwitchSVG } from "../images/menu_switch.svg";
-import { ReactComponent as MenuAddSVG } from "../images/menu_add.svg";
-import SearchInput from "./SearchInput";
+import "./mainHeader.css";
+import { ReactComponent as MenuSwitchSVG } from "../../images/menu_switch.svg";
+import { ReactComponent as MenuAddSVG } from "../../images/menu_add.svg";
+import SearchInput from "./SearchInput"
 import { useContext, useState } from "react";
-import { UiContext } from "../store/ui-context";
+import { UiContext } from "../../store/ui-context";
 
 const Mainheader = () => {
   const { addToDoHandler, isAddToDoOpen, selectedTheme, themeChanger, userName, logOutHandler} =
@@ -32,7 +32,7 @@ const Mainheader = () => {
                         checked={
                           selectedTheme.selectedTheme === "light" ? false : true
                         }
-                        onClick={themeChanger}
+                        onChange={themeChanger}
                       />
                       <span className="theme_switch_slider" />
                     </label>

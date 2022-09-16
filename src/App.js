@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
-import "./App.css";
-import Mainheader from "./components/MainHeader";
-import Main from "./components/Main";
+import "./app.css";
+import Mainheader from "./components/MainHeader/MainHeader";
+import Main from "./components/Main/Main";
 import { UiContext } from "./store/ui-context";
 
 const App = () => {

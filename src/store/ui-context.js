@@ -67,7 +67,7 @@ export const UiProvider = ({ children }) => {
   };
 
   const addToDoHandler = () => {
-    if (isAddToDoOpen.isAddToDoOpen === false) {
+    if (!isAddToDoOpen.isAddToDoOpen) {
       setIsAddToDoOpen({ isAddToDoOpen: true });
     } else {
       setIsAddToDoOpen({ isAddToDoOpen: false });

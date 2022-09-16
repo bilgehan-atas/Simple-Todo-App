@@ -24,6 +24,7 @@
   width: 65ch;
   min-height: 5rem;
   border-radius: 5px;
+  color: var(--text-primary);
   background-color: var(--background);
   caret-color: var(--caret-main);
   font-family: var(--ff-primary);
@@ -65,7 +66,7 @@
 
 .status {
   height: 0.3rem;
-  transition:all 0.5s ease;
+  transition: all 0.5s ease;
   padding-left: 1rem;
   font-size: var(--fs-sm);
   color: var(--accent);

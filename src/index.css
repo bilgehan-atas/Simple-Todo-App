@@ -4,6 +4,9 @@
 
 html {
   background-color: var(--background);
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 body {

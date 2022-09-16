@@ -5,10 +5,9 @@ export const ItemsContext = createContext([]);
 
 export const ItemsProvider = ({ children }) => {
   const [items, setItems] = useState([]);
-  const [itemsByCompletion, setItemsByCompletion] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isError, setIsError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [searchContent, setSearchContent] = useState(null);
   const [showCompletedItems, setShowCompletedItems] = useState(false);
 
@@ -16,16 +15,13 @@ export const ItemsProvider = ({ children }) => {
     const fetchdata = async () => {
       const result = await getItems();
       if (result.error) {
-        setIsError(result.error);
+        setErrorMessage(result.error);
       } else {
         setItems(result);
-        setItemsByCompletion(
-          result.filter((element) => element.isCompleted === showCompletedItems)
-        );
         setFilteredItems(
           result.filter((element) => element.isCompleted === showCompletedItems)
         );
-        setIsError(null);
+        setErrorMessage(null);
         setIsLoaded(true);
       }
     };
@@ -33,16 +29,8 @@ export const ItemsProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // console.log("useeffect filte",items)
     filterItems();
-  }, [items, itemsByCompletion, searchContent]);
-
-  useEffect(() => {
-    // console.log("useefefet completion",items)
-    setItemsByCompletion(
-      items.filter((element) => element.isCompleted === showCompletedItems)
-    );
-  }, [items, showCompletedItems]);
+  }, [showCompletedItems, searchContent]);
 
   const itemsLoader = (type, object) => {
     if (type === "deleteItem") {
@@ -50,46 +38,34 @@ export const ItemsProvider = ({ children }) => {
       const newItems = items;
       items.splice(index, 1);
       setItems(newItems);
-      setItemsByCompletion(
-        items.filter((element) => element.isCompleted === showCompletedItems)
-      );
-      setFilteredItems(
-        items.filter((element) => element.isCompleted === showCompletedItems)
-      );
     }
     if (type === "postItem") {
       const newItems = items;
       newItems.unshift(object)
       setItems(newItems);
-      setItemsByCompletion(
-        items.filter((element) => element.isCompleted === showCompletedItems)
-      );
-      setFilteredItems(
-        items.filter((element) => element.isCompleted === showCompletedItems)
-      );
     }
-    if (type === "putItem") {
+    if (type === "putItem_Complete") {
       const index = items.map((e)=> {return e.id}).indexOf(object.id)
-      const newItem = items[index]["isCompleted"] = object.isCompleted;
       const newItems = items;
-      items.splice(index, 1, newItem);
+      newItems[index]["isCompleted"] = object.isCompleted;
       setItems(newItems);
-      setItemsByCompletion(
-        items.filter((element) => element.isCompleted === showCompletedItems)
-      );
-      setFilteredItems(
-        items.filter((element) => element.isCompleted === showCompletedItems)
-      );
     }
+    if (type === "putItem_Edit") {
+      const index = items.map((e)=> {return e.id}).indexOf(object.id)
+      const newItems = items;
+      newItems[index] = object;
+      setItems(newItems);
+    }
+    filterItems();
   }
 
   const filterItems = () => {
-    const newItems = itemsByCompletion.filter(
+    const newItems = items.filter(
       (item) =>
         !searchContent ||
         item?.content?.toLowerCase().includes(searchContent.toLowerCase())
     );
-    setFilteredItems(newItems);
+    setFilteredItems(newItems.filter((element) => element.isCompleted === showCompletedItems))
   };
 
   const value = {
@@ -97,7 +73,7 @@ export const ItemsProvider = ({ children }) => {
     filteredItems,
     itemsLoader,
     isLoaded,
-    isError,
+    errorMessage,
     searchContent,
     setSearchContent,
     showCompletedItems,

@@ -1,11 +1,11 @@
-import "./AddToDo.css";
+import "./addToDo.css";
 import React, { useContext, useRef, useState } from "react";
-import postItem from "../api/postItem";
-import { UiContext } from "../store/ui-context";
-import { ItemsContext } from "../store/items-context";
-import { ReactComponent as LoadingSVG } from "../images/loading.svg";
+import postItem from "../../api/postItem";
+import { UiContext } from "../../store/ui-context";
+import { ItemsContext } from "../../store/items-context";
+import { ReactComponent as LoadingSVG } from "../../images/loading.svg";
 
-const AddToDo = (props) => {
+const AddToDo = ({notificationHandler}) => {
   const inputRef = useRef(null);
   const { addToDoHandler } = useContext(UiContext);
   const { itemsLoader } = useContext(ItemsContext)
@@ -29,10 +29,10 @@ const AddToDo = (props) => {
       setIsLoading(true);
       postItem(newItem).then((response) => {
         if (response.error) {
-          props.isOkHandler("Something went terribly wrong!")
+          notificationHandler("Something went terribly wrong!")
         } else {
           itemsLoader("postItem", {...newItem, id: response.id});
-          props.isOkHandler("A new Item has been added");
+          notificationHandler("A new Item has been added");
           addToDoHandler();
         }
         setIsLoading(false);
