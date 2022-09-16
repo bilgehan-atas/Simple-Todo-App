@@ -20,7 +20,7 @@ const App = () => {
   };
 
   return (
-    <div className="App" data-theme={selectedTheme.selectedTheme}>
+    <div className="App" >
       <React.Fragment>
         {!userName.userName ? (
           <div className="user_name_input_container">

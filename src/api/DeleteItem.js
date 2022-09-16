@@ -1,4 +1,4 @@
-async function DeleteItem(id) {
+async function deleteItem(id) {
     try {
       const response = await fetch(
         `https://631359a3b466aa9b0397c51e.mockapi.io/b/todos/${id}`,
@@ -17,5 +17,5 @@ async function DeleteItem(id) {
     }
   }
   
-  export default DeleteItem;
+  export default deleteItem;
   

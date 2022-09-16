@@ -1,4 +1,4 @@
-async function PostItem(newItem) {
+async function postItem(newItem) {
     try {
       const response = await fetch(
         "https://631359a3b466aa9b0397c51e.mockapi.io/b/todos",
@@ -10,9 +10,8 @@ async function PostItem(newItem) {
           },
         }
       );
-      await response.json();
       if (response.ok) {
-        return response;
+        return response.json();
       }
   
       throw new Error();
@@ -21,5 +20,5 @@ async function PostItem(newItem) {
     }
   }
   
-  export default PostItem;
+  export default postItem;
   

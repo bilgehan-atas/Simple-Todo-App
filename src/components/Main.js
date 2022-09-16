@@ -38,7 +38,7 @@ const Main = () => {
     <React.Fragment>
       <div className="main_container">
         {isAddToDoOpen.isAddToDoOpen && <AddToDo isOkHandler={isOkHandler} />}
-        {isLoaded === false && isError === null && (
+        {!isLoaded && isError === null && (
           <p className="main_notification">Loading...</p>
         )}
         {isLoaded === true &&
@@ -53,7 +53,7 @@ const Main = () => {
             </p>
           </>
         )}
-        {isLoaded === true && filteredItems.length > 0 && (
+        {isLoaded === true && !!filteredItems.length && (
           <>
             <div className="main_title_container">
               <p className="main_m_title">Today</p>

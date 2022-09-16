@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import GetItems from "../api/GetItems";
+import getItems from "../api/getItems";
 
 export const ItemsContext = createContext([]);
 
@@ -14,7 +14,7 @@ export const ItemsProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const result = await GetItems();
+      const result = await getItems();
       if (result.error) {
         setIsError(result.error);
       } else {
@@ -33,23 +33,55 @@ export const ItemsProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    // console.log("useeffect filte",items)
     filterItems();
   }, [items, itemsByCompletion, searchContent]);
 
   useEffect(() => {
+    // console.log("useefefet completion",items)
     setItemsByCompletion(
       items.filter((element) => element.isCompleted === showCompletedItems)
     );
   }, [items, showCompletedItems]);
 
-  const itemsLoader = async () => {
-    const result = await GetItems();
-    if (result.error) {
-      setIsError(result.error);
-    } else {
-      setItems(result);
+  const itemsLoader = (type, object) => {
+    if (type === "deleteItem") {
+      const index = items.map((e)=> {return e.id}).indexOf(object.id)
+      const newItems = items;
+      items.splice(index, 1);
+      setItems(newItems);
+      setItemsByCompletion(
+        items.filter((element) => element.isCompleted === showCompletedItems)
+      );
+      setFilteredItems(
+        items.filter((element) => element.isCompleted === showCompletedItems)
+      );
     }
-  };
+    if (type === "postItem") {
+      const newItems = items;
+      newItems.unshift(object)
+      setItems(newItems);
+      setItemsByCompletion(
+        items.filter((element) => element.isCompleted === showCompletedItems)
+      );
+      setFilteredItems(
+        items.filter((element) => element.isCompleted === showCompletedItems)
+      );
+    }
+    if (type === "putItem") {
+      const index = items.map((e)=> {return e.id}).indexOf(object.id)
+      const newItem = items[index]["isCompleted"] = object.isCompleted;
+      const newItems = items;
+      items.splice(index, 1, newItem);
+      setItems(newItems);
+      setItemsByCompletion(
+        items.filter((element) => element.isCompleted === showCompletedItems)
+      );
+      setFilteredItems(
+        items.filter((element) => element.isCompleted === showCompletedItems)
+      );
+    }
+  }
 
   const filterItems = () => {
     const newItems = itemsByCompletion.filter(

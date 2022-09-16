@@ -3,8 +3,8 @@ import "./ItemCard.css";
 import { ReactComponent as LoadingSVG } from "../images/loading.svg";
 import { ReactComponent as EditSVG } from "../images/edit.svg";
 import { ReactComponent as DeleteSVG } from "../images/delete.svg";
-import PutItem from "../api/PutItem";
-import DeleteItem from "../api/DeleteItem";
+import putItem from "../api/putItem";
+import deleteItem from "../api/deleteItem";
 import { ItemsContext } from "../store/items-context";
 
 const ItemCard = ({
@@ -31,13 +31,12 @@ const ItemCard = ({
 
   const completeHandler = (id, bool) => {
     setIsLoading(id);
-    PutItem({ isCompleted: !bool }, id).then((response) => {
+    putItem({ isCompleted: !bool }, id).then((response) => {
       if (response.error) {
         isOkHandler("There has been a problem on checking ToDo");
       } else {
-        itemsLoader().then(() => {
-          isOkHandler("The ToDo has been updated!");
-        });
+        itemsLoader("putItem", { isCompleted: !bool, id });
+        isOkHandler("The ToDo has been updated!");
       }
       setIsLoading(null);
     });
@@ -53,7 +52,7 @@ const ItemCard = ({
       };
       const id = isEditOpen;
       setIsLoading(id);
-      PutItem(newItem, id).then((response) => {
+      putItem(newItem, id).then((response) => {
         if (response.error) {
           setIsError(true);
         } else {
@@ -70,22 +69,23 @@ const ItemCard = ({
 
   const deleteHandler = (id) => {
     setIsLoading(id);
-    DeleteItem(id).then((response) => {
+    deleteItem(id).then((response) => {
       if (response.error) {
         isOkHandler("We had a problem deleting the ToDo!");
       } else {
-        itemsLoader().then(() => {
-          setDeleteConfirmation(null);
-          isOkHandler("The ToDo has been removed!");
-        });
+        itemsLoader("deleteItem", {"id": id});
+        setDeleteConfirmation(null);
+        isOkHandler("The ToDo has been removed!");
       }
       setIsLoading(null);
     });
   };
 
   const pgSliceStart =
-    currentPage - 5 <= 0 ? 0
-      : currentPage + 5 >= totalPages ? totalPages - 10
+    currentPage - 5 <= 0
+      ? 0
+      : currentPage + 5 >= totalPages
+      ? totalPages - 10
       : currentPage - 5;
   const pgSliceEnd = currentPage + 5 < 10 ? 10 : currentPage + 5;
 

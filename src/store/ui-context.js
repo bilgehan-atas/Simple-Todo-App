@@ -8,7 +8,6 @@ export const UiProvider = ({ children }) => {
     selectedTheme: "light",
   });
   const [isAddToDoOpen, setIsAddToDoOpen] = useState({ isAddToDoOpen: false });
-  
 
   useEffect(() => {
     try {
@@ -50,6 +49,12 @@ export const UiProvider = ({ children }) => {
       JSON.stringify({ selectedTheme: newTheme })
     );
   };
+
+  useEffect(()=> {
+    document
+    .getElementsByTagName("html")[0]
+    .setAttribute("data-theme", selectedTheme.selectedTheme);
+  }, [selectedTheme])
 
   const userNameChanger = (newName) => {
     setUserName({ userName: newName });

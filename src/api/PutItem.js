@@ -1,4 +1,4 @@
-async function PutItem(newItem, id) {
+async function putItem(newItem, id) {
     try {
       const response = await fetch(
         `https://631359a3b466aa9b0397c51e.mockapi.io/b/todos/${id}`,
@@ -21,5 +21,5 @@ async function PutItem(newItem, id) {
     }
   }
   
-  export default PutItem;
+  export default putItem;
   
