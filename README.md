@@ -1,3 +1,9 @@
+## Simple ToDo App
+
+This is a simple todo app using context api.
+
+You can see it live in action at [https://fastidious-axolotl-f3c4b9.netlify.app](https://fastidious-axolotl-f3c4b9.netlify.app/)
+
 ## Environment Requirements
 
 You need below versions of node and npm:
